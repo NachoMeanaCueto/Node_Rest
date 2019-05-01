@@ -1,6 +1,6 @@
 require("../server/config/config");
-const express = require('./node_modules/express');
-const bodyParser = require('./node_modules/body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
