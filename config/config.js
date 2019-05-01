@@ -1,2 +1,2 @@
  //set enviroment port
- process.env.port = process.env.port || 8080;
+ process.env.PORT = process.env.PORT || 8080;
