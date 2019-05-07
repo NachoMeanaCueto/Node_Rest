@@ -1,32 +1,21 @@
 require("./config/config");
 const express = require('express');
-const bodyParser = require('body-parser');
-const app = express()
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+const mongoose = require('mongoose');
+const userApi = require('./Api/UsersApi');
+
+const app = express();
 
 
-app.get('/user', function (req, res) {
-  res.json('getUser')
-});
- 
-app.post('/user', function (req, res) {
-  let body = req.body;
+app.use(userApi);
 
-  res.json({ body });
-});
 
-app.put('/user/:id', function (req, res) {
-  let id = req.params.id;
-  res.json({ id })
-});
+mongoose.connect('mongodb://localhost:27017/cafe', {useNewUrlParser: true}, (err, res) => {
 
-app.delete('/user/:id', function (req, res) {
+      if(err)
+        throw new Error(err);
 
-  let id = req.params.id;
-
-  res.json({ userToDelete: id })
+      console.log("Database Online");
 });
 
 app.listen(process.env.PORT, () => console.log(`Escuchando el puerto ${process.env.PORT}`))
