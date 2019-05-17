@@ -10,7 +10,7 @@ const app = express();
 app.use(userApi);
 
 
-mongoose.connect('mongodb://localhost:27017/cafe', {useNewUrlParser: true}, (err, res) => {
+mongoose.connect( process.env.ConnectionString, {useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
 
       if(err)
         throw new Error(err);
