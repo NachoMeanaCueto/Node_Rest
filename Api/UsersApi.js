@@ -1,16 +1,12 @@
-const express = require('express');
-const bodyParser = require('body-parser');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-
-const app = express();
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+const { permit } = require('../middleware/AuthInfrastructure');
+const app = require('./BaseApi');
 
 
-app.get('/user', function (req, res) {
+
+app.get('/user', (req, res) => {
 
   let from = Number(req.query.from || 0);
   let limit = Number(req.query.limit || 10);
@@ -39,7 +35,7 @@ app.get('/user', function (req, res) {
 
 });
  
-app.post('/user', function (req, res) {
+app.post('/user', permit('ADMIN_ROLE'), function (req, res) {
   let body = req.body;
 
   let user = new User({ 
@@ -67,7 +63,7 @@ app.post('/user', function (req, res) {
 
 });
 
-app.put('/user/:id', function (req, res) {
+app.put('/user/:id', permit('ADMIN_ROLE'),function (req, res) {
   let id = req.params.id;
   let body = _.pick(req.body,['name','role','status']) ;
   
@@ -87,7 +83,7 @@ app.put('/user/:id', function (req, res) {
    .where({status:true});
 });
 
-app.delete('/user/:id', function (req, res) {
+app.delete('/user/:id',permit('ADMIN_ROLE'), function (req, res) {
  
   //Soft delete
   User.findByIdAndUpdate(req.params.id, { status: false } , { new: true }, (err, dbUser) => {

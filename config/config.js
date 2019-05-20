@@ -3,6 +3,10 @@
 
  process.env.ConnectionString =   process.env.ConnectionString  || 'mongodb://localhost:27017/coffeDb';
 
+ process.env.TokenExpireTime = '1h';
+ process.env.TokenSecret = process.env.TokenSecret || 'TokenSecret-Dev';
+
+
 
  
 
