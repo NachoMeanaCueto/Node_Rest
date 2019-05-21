@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
 
+const AllowAnonimusList = ['','/','/login','/googleLogin'];
 
 let tokenVerify = (req, res, next) => {
 
-    if(req.path === '/login') 
+    if(AllowAnonimusList.indexOf(req.path) >= 0) 
     {
         return next();
     }

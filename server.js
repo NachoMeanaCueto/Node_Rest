@@ -1,14 +1,10 @@
 require("./config/config");
 const express = require('express');
-
 const mongoose = require('mongoose');
-const ApplicationApi = require('./Api/ApplicationApi');
+const app = require('./Api/BaseApi');
+const path = require('path');
 
-// const app = express();
-
-
-// app.use(ApplicationApi);
-
+app.use(express.static(path.resolve(__dirname , 'public')));
 
 mongoose.connect( process.env.ConnectionString, {useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
 
@@ -18,4 +14,4 @@ mongoose.connect( process.env.ConnectionString, {useNewUrlParser: true, useCreat
       console.log("Database Online");
 });
 
-ApplicationApi.listen(process.env.PORT, () => console.log(`Escuchando el puerto ${process.env.PORT}`))
+app.listen(process.env.PORT, () => console.log(`Escuchando el puerto ${process.env.PORT}`))
