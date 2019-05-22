@@ -28,7 +28,11 @@ var productSchema = new mongoose.Schema({
     user: { 
         type: Schema.Types.ObjectId,
         ref: 'user'
-     }
+     },    
+     img: {
+        type: String,
+        required: false
+    },
 });
 
 

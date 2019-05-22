@@ -3,14 +3,9 @@ const bodyParser = require('body-parser');
 const Category = require('../models/category');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-const { permit, tokenVerify } = require('../middleware/AuthInfrastructure');
-
+const { permit } = require('../middleware/AuthInfrastructure');
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(tokenVerify);
-
 
 app.get('/Categories', (req, res) => {
 

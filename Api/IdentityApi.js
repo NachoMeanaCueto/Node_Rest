@@ -2,17 +2,13 @@ const express = require('express');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const bodyParser = require('body-parser');
-// const _ = require('underscore');
-
 
 
 const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client(process.env.googleClientId);
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+
 
 app.post('/login', (req, res) => {
  
